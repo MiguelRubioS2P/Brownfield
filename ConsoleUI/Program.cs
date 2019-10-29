@@ -16,44 +16,74 @@ namespace ConsoleUI
         {
             string w;
             int i, t, ttl;
+            bool cont = false;
+            string consoleValue;
             List<TimeSheetEntry> ents = new List<TimeSheetEntry>();
-            Console.Write("Enter what you did: ");
-            w = Console.ReadLine();
-            Console.Write("How long did you do it for: ");
-            t = int.Parse(Console.ReadLine());
-            TimeSheetEntry ent = new TimeSheetEntry();
-            ent.HoursWorked = t;
-            ent.WorkDone = w;
-            ents.Add(ent);
-            Console.Write("Do you want to enter more time:");
-            bool cont = bool.Parse(Console.ReadLine());
+            //Console.Write("Enter what you did: ");
+            //w = Console.ReadLine();
+            //Console.Write("How long did you do it for: ");
+            //t = int.Parse(Console.ReadLine());
+            
+            //ent.HoursWorked = t;
+            //ent.WorkDone = w;
+            //ents.Add(ent);
+            //Console.Write("Do you want to enter more time:");
+            //No se puede convertir el valor recibido por consola que es string en boleano
+            //bool cont = bool.Parse(Console.ReadLine());
+            //Creo una variable string y trato este string, se puede poner en una funcion.
+            //De todas maneras un cambio funcional es una función dentro del do para que se repita y no tenerlo dos veces
+            //consoleValue = Console.ReadLine();
+            //if (consoleValue == "yes")
+            //{
+            //    cont = true;
+            //}
+            //else if (consoleValue == "no")
+            //{
+            //    cont = false;
+            //}
+
+            //Dejamos arriba las creaciones de las variables necesarias.
             do
             {
                 Console.Write("Enter what you did: ");
                 w = Console.ReadLine();
                 Console.Write("How long did you do it for: ");
                 t = int.Parse(Console.ReadLine());
+                TimeSheetEntry ent = new TimeSheetEntry();
                 ent.HoursWorked = t;
                 ent.WorkDone = w;
                 ents.Add(ent);
                 Console.Write("Do you want to enter more time:");
-                cont = bool.Parse(Console.ReadLine());
+                //Controlamos manualmente la entrada por consola
+                consoleValue = Console.ReadLine();
+                if (consoleValue == "yes")
+                {
+                    cont = true;
+                }
+                else if(consoleValue == "no")
+                {
+                    cont = false;
+                }
             } while (cont == true);
             ttl = 0;
             for (i = 0; i < ents.Count; i++)
             {
-                if (ents[i].WorkDone.Contains("Acme"))
+                //Acme tiene que ponerse en Mayúsculas 
+                if (ents[i].WorkDone.Contains("ACME"))
                 {
-                    ttl += i;
+                    ttl += ents[i].HoursWorked; ;
                 }
             }
             Console.WriteLine("Simulating Sending email to Acme");
             Console.WriteLine("Your bill is $" + ttl * 150 + " for the hours worked.");
+            int help = 0;
+            help = ttl;
+            ttl = 0;
             for (i = 0; i < ents.Count; i++)
             {
                 if (ents[i].WorkDone.Contains("ABC"))
                 {
-                    ttl += i;
+                    ttl += ents[i].HoursWorked;
                 }
             }
             Console.WriteLine("Simulating Sending email to ABC");
